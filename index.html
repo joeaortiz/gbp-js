@@ -1,0 +1,80 @@
+<!doctype html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://distill.pub/template.v1.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+</head>
+
+<style>
+#myContainer {
+  width: 400px;
+  height: 400px;
+  position: relative;
+  background: yellow;
+}
+#myAnimation {
+  width: 50px;
+  height: 50px;
+  position: absolute;
+  background: red;
+}
+</style>
+
+<body>
+
+  <script type="text/front-matter">
+    title: "GBP for Spatial AI"
+    description: "A Visual Introduction "
+    authors:
+    - Joe Ortiz: http://joeaortiz.github.io
+    - Andy Davison: https://www.doc.ic.ac.uk/~ajd/
+    affiliations:
+    - Imperial College London: https://wp.doc.ic.ac.uk/robotvision/
+    - Imperial College London: https://wp.doc.ic.ac.uk/robotvision/
+  </script>
+
+  <dt-article>
+    <h1>Gaussian Belief Propagation for Spatial AI</h1>
+    <h2>A visual introduction to Gaussian Belief Propagation for geometric Spatial AI vision problems. </h2>
+    <dt-byline></dt-byline>
+
+    <h2>A brief theoretical background </h2>
+    <p>Intuition of the algorithm. </p>
+    <p>Relation to energy based models. </p>
+
+    <h2>Simulated geometric estimation problems </h2>
+    <p>1D and 2D examples </p>
+
+    <div style="l-screen-inset">
+  	<img src="mapping.jpg" style="display: block; margin: auto; width: 50%;"/>
+    </div>
+
+    <p>Java script should appear here </p>
+    <script language = "javascript" type = "text/javascript">
+       <!--
+          document.write("Hello World!")
+       //-->
+    </script> 
+
+
+    <p>
+      <button onclick="myMove()">Click Me</button> 
+    </p>
+
+    <div id ="myContainer">
+    <div id ="myAnimation"></div>
+    </div>
+
+    <script>myMove();</script>
+
+  </dt-article>
+
+  <dt-appendix>
+  	<h2>Acknowledgments</h2>
+  	<p>Andy developed the initial pygame simulations, Joe made the approach work for bundle adjustment. </p>
+  </dt-appendix>
+
+  <script type="text/bibliography">
+
+  </script>
+</body>
