@@ -4,6 +4,7 @@
   "description": "Visual Introduction to Gaussian Belief Propagation",
   "main": "main.js",
   "scripts": {
+    "gbp": "./gbp.js",
     "build": "webpack",
     "serve": "webpack-serve --config ./webpack.config.js",
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -31,5 +32,16 @@
     "d3": "^5.8.0",
     "ml-matrix": "^5.2.1",
     "random": "^2.0.12"
-  }
+  },
+  "directories": {
+    "test": "tests"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeaortiz/gbp-distill.git"
+  },
+  "bugs": {
+    "url": "https://github.com/joeaortiz/gbp-distill/issues"
+  },
+  "homepage": "https://github.com/joeaortiz/gbp-distill#readme"
 }
