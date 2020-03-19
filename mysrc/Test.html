@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>1D-GBP</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+    <style>
+      * { padding: 0; margin: 0; }
+      canvas { background: #eee; display: block; margin: 0 auto; }
+    </style>
+</head>
+
+<canvas id="canvas" width="800" height="640"></canvas>
+
+
+<script>
+
+  // Visual varaibles
+  var canvas = document.getElementById("canvas");
+  var ctx = canvas.getContext("2d");
+  ctx.lineWidth = 3
+
+  var ballRadius = 10;
+
+  // GBP variables
+  var n_var_nodes = 10;
+  var ballSpacing = (canvas.width - 100) / (n_var_nodes - 1)
+
+  var var_nodes = [];
+  for(var c=0; c<n_var_nodes; c++) {
+      var_nodes[c] = { x: 0, y: canvas.height/2, var_y: Math.pow(50, 2), map_y: 0 };
+  }
+
+  var n_measurements = [];
+  var measurements = [];
+  var meas_model_std = 50;
+
+  var smoothness_std = 50;
+
+  // Average distance of belief means from MAP solution
+  var dist = 0;
+
+  var GBP_on = 0;
+
+  function syncGBP(dy) {
+    // var_nodes[0].y = var_nodes[0].y - dy
+    alert(square(2))
+  }
+
+  function drawCanvasBackground() {
+    ctx.fillStyle = "grey";
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+  }
+
+  function drawNodes() {
+    for(var c=0; c<n_var_nodes; c++) {
+      var_nodes[c].x = 50 + c*ballSpacing;
+
+      // Draw means
+      ctx.beginPath();
+      ctx.arc(var_nodes[c].x, var_nodes[c].y, ballRadius, 0, Math.PI*2);
+      ctx.fillStyle = "#0095DD";
+      ctx.fill();
+      ctx.closePath();
+      // Draw variances
+      ctx.beginPath();
+      ctx.moveTo(var_nodes[c].x, parseInt(var_nodes[c].y) + parseInt(Math.sqrt(var_nodes[c].var_y)));
+      ctx.lineTo(var_nodes[c].x, parseInt(var_nodes[c].y) - parseInt(Math.sqrt(var_nodes[c].var_y)));
+      ctx.strokeStyle = "#0095DD";
+      ctx.stroke();
+
+    }
+  }
+
+  function drawMeasurements() {
+    for(var c=0; c<n_measurements; c++) {
+      // Draw means
+      ctx.beginPath();
+      ctx.arc(measurements[c].x, measurements[c].y, ballRadius, 0, Math.PI*2);
+      ctx.fillStyle = "red";
+      ctx.fill();
+      ctx.closePath();
+      // Draw variances
+      ctx.beginPath();
+      ctx.moveTo(measurements[c].x, parseInt(measurements[c].y) - parseInt(meas_model_std));
+      ctx.lineTo(measurements[c].x, parseInt(measurements[c].y) + parseInt(meas_model_std));
+      ctx.strokeStyle = "red";
+      ctx.stroke();
+
+    }
+  }
+
+  function drawDistance() {
+      ctx.font = "16px Arial";
+      ctx.fillStyle = "black";
+      ctx.fillText("Av dist from MAP: "+dist, 8, 20);
+  }
+
+  function updateVis() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    if (GBP_on) {
+      syncGBP(2);
+    }
+    drawCanvasBackground();
+    drawNodes();
+    drawMeasurements();
+    drawDistance();
+
+    requestAnimationFrame(updateVis);
+
+  }
+
+  function addMeasurement(e) {
+    var relativeX = e.clientX - canvas.offsetLeft;
+    var relativeY = e.clientY - canvas.offsetTop;
+    if(relativeX > 0 && relativeX < canvas.width && relativeY > 0 && relativeY < canvas.height) {
+      n_measurements++;
+      measurements.push({ x: relativeX, y: relativeY, var_y: meas_model_std });
+
+    }
+  }
+
+  function start_sweepGBP() {
+    var_nodes[0].y = 200;
+  }
+
+  function start_syncGBP() {
+    GBP_on = 1;
+  }
+
+  function update_meas_model_std(val) {
+    meas_model_std = val;
+    document.getElementById("mmstd").innerHTML = meas_model_std; 
+  }
+
+  function update_smoothness_std(val) {
+    smoothness_std = val;
+    document.getElementById("sstd").innerHTML = smoothness_std; 
+  }
+
+  document.addEventListener("click", addMeasurement, false);
+
+  updateVis();
+
+</script>
+
+<p>Use this slider set the standard deviation of the Gaussian measurement model.</p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="meas_model_std" oninput="update_meas_model_std(this.value)">
+  <p id="mmstd"></p>
+</div>
+
+<p>Use this slider set the standard deviation of the smoothness factors.</p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="smoothness_std" oninput="update_smoothness_std(this.value)">
+  <p id="sstd"></p>
+</div>
+
+
+
+<p><button onclick="start_sweepGBP()">Back and forth GBP</button></p> 
+<p><button onclick="start_syncGBP()">Start synchronous GBP</button></p> 
+
+
+</body>
+</html>

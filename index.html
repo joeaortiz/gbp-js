@@ -57,16 +57,28 @@
     </script> 
 
 
-    <p>
-      <button onclick="myMove()">Click Me</button> 
-    </p>
+<p><button onclick="myMove()">Click Me</button></p> 
 
-    <div id ="myContainer">
-    <div id ="myAnimation"></div>
-    </div>
+<div id ="container">
+  <div id ="animate"></div>
+</div>
 
-    <script>myMove();</script>
-
+<script>
+function myMove() {
+  var elem = document.getElementById("animate");   
+  var pos = 0;
+  var id = setInterval(frame, 5);
+  function frame() {
+    if (pos == 350) {
+      clearInterval(id);
+    } else {
+      pos++; 
+      elem.style.top = pos + "px"; 
+      elem.style.left = pos + "px"; 
+    }
+  }
+}
+</script>
   </dt-article>
 
   <dt-appendix>
@@ -77,4 +89,5 @@
   <script type="text/bibliography">
 
   </script>
+  
 </body>
