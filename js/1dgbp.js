@@ -291,13 +291,14 @@ measurements = []
 
 var GBP_on = 0;
 var GBP_sweep = 0;
+var GBP_sweep_done = 0;
 var n_iters = 0;
 var dist = 0; // Average distance of belief means from MAP solution
 var iters_per_sec = 25;
 var disp_MAP = 0;
 
 function syncGBP() {
-  if (n_iters == 0) {
+  if (n_iters == 0 && GBP_sweep_done == 0) {
     // Set initial position of nodes
     for(var c=0; c<graph.var_nodes.length; c++) {
       graph.var_nodes[c].belief.eta = new m.Matrix([[0.05]]);
@@ -424,6 +425,7 @@ function updateVis() {
       if (graph.forward == 1 && graph.sweep_ix == 0) {
         // Back and forth sweep complete
         GBP_sweep = 0;
+        GBP_sweep_done = 1;
       }
     }
   }
