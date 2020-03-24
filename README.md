@@ -18,10 +18,8 @@ open components/1dgbp.html  # or gnome-open
 ```bash
 brew install npm
 
-# initialize package.json
-npm init -y
-npm install ml-matrix --save
-npm install browserify --save-dev
+# install dependencies
+npm install
 
 # build JS bundles
 npx browserify js/1dgbp.js -o js/bundles/1dgbp.js
