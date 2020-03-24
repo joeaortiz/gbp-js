@@ -1,0 +1,29 @@
+{
+  "name": "gbp-distill",
+  "version": "1.0.0",
+  "description": "### 1D GBP ``` git clone git@github.com:joeaortiz/gbp-distill.git cd gbp-distill",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/joeaortiz/gbp-distill.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/joeaortiz/gbp-distill/issues"
+  },
+  "homepage": "https://github.com/joeaortiz/gbp-distill#readme",
+  "dependencies": {
+    "ml-matrix": "^6.4.1"
+  },
+  "devDependencies": {
+    "browserify": "^16.5.0"
+  }
+}
