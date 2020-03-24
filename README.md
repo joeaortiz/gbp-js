@@ -1,6 +1,11 @@
 # Visualising Gaussian Belief Propagation
 
 ### 1D GBP
+
+Hosted [here](https://joeaortiz.github.io/gbp-distill/components/1dgbp.html). 
+
+To host locally:
+
 ```
 git clone git@github.com:joeaortiz/gbp-distill.git
 cd gbp-distill
