@@ -1,8 +1,7 @@
 # Visualising Gaussian Belief Propagation
 
 ## Usage
-
-```bash
+```
 git clone git@github.com:joeaortiz/gbp-distill.git
 cd gbp-distill
 git checkout gh-pages
