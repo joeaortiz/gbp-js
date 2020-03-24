@@ -3,7 +3,6 @@
 ### 1D GBP
 
 Hosted [here](https://joeaortiz.github.io/gbp-distill/components/1dgbp.html). 
-
 To host locally:
 
 ```
