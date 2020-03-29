@@ -250,6 +250,11 @@ var last_key_pose = [50, 590];
 var step = 10;
 var new_pose_dist = 70;
 
+var landmarks = [];
+
+var GBP_on = 0;
+var n_iters = 0;
+
 const graph = new FactorGraph();
 // Create variable node at starting position
 const first_var_node = new VariableNode(2, 0);
@@ -260,12 +265,16 @@ graph.var_nodes.push(first_var_node);
 
 
 
+
+
+
 // Visual varaibles
 var canvas = document.getElementById("canvas");
 var ctx = canvas.getContext("2d");
 ctx.lineWidth = 3;
 
 var node_radius = 10;
+var lmk_radius = 6;
 
 // GBP variables
 var n_var_nodes = 2;
@@ -321,7 +330,50 @@ function drawNodes() {
   }
 }
 
+function drawLandmarks() {
+  for(var i=0; i<landmarks.length; i++) {
+    ctx.beginPath();
+    ctx.arc(landmarks[i].x, landmarks[i].y, lmk_radius, 0, Math.PI*2);
+    ctx.fillStyle = "orange";
+    ctx.fill();
+    ctx.closePath();
+  }
+}
 
+function drawMAP() {
+  var values = graph.computeMAP();
+  const means = values[0];
+  const bigSigma = values[1];
+  for(var c=0; c<graph.var_nodes.length; c++) {
+    var x = nodes_x_offset + c*node_x_spacing;
+    var y = means.get(c, 0);
+    var var_y = bigSigma.get(c, c);
+
+    // Draw means
+    ctx.beginPath();
+    ctx.arc(x, y, node_radius, 0, Math.PI*2);
+    ctx.strokeStyle = 'green';
+    ctx.stroke();
+    // Draw variances
+    ctx.beginPath();
+    ctx.moveTo(x, parseInt(y) + parseInt(Math.sqrt(var_y)));
+    ctx.lineTo(x, parseInt(y) - parseInt(Math.sqrt(var_y)));
+    ctx.strokeStyle = 'green';
+    ctx.stroke();
+  }
+}
+
+function drawDistance() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Av dist from MAP: "+dist.toFixed(4), 8, 20);
+}
+
+function drawNumIters() {
+    ctx.font = "16px Arial";
+    ctx.fillStyle = "black";
+    ctx.fillText("Num iterations: "+n_iters, canvas.width - 170, 20);
+}
 
 
 function updateVis() {
@@ -330,6 +382,9 @@ function updateVis() {
 
   drawCanvasBackground();
 
+  // drawNumIters();
+  // drawDistance();
+  drawLandmarks();
   drawRobot();
   drawNodes();
 }
@@ -341,22 +396,41 @@ function startVis(fps) {
 }
 
 document.addEventListener("keydown", checkKey);
+document.addEventListener("click", addLandmark, false);
+
 
 function checkKey(e) {
+  console.log(canvas.width, ctx.height)
   e = e || window.event;
   if (e.keyCode == '38') {
-    robot_loc[1] -= step;
+    if (robot_loc[1] > node_radius + step) {
+      robot_loc[1] -= step;
+    }
   }
   else if (e.keyCode == '40') {
-    robot_loc[1] += step;
+    if (robot_loc[1] < canvas.height - node_radius - step) {
+      robot_loc[1] += step;
+    }
   }
   else if (e.keyCode == '37') {
-    robot_loc[0] -= step;
+    if (robot_loc[0] > node_radius + step) {
+      robot_loc[0] -= step;
+    }
   }
   else if (e.keyCode == '39') {
-    robot_loc[0] += step;
+    if (robot_loc[0] < canvas.width - node_radius - step) {
+      robot_loc[0] += step;
+    }
   }
   checkAddVarNode();
+}
+
+function addLandmark(e) {
+  var relativeX = e.clientX - canvas.offsetLeft;
+  var relativeY = e.clientY - canvas.offsetTop;
+  if(relativeX > 0 && relativeX < canvas.width && relativeY > 0 && relativeY < canvas.height) {
+    landmarks.push({x: relativeX, y: relativeY});
+  }
 }
 
 function checkAddVarNode() {
