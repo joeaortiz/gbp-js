@@ -7,11 +7,19 @@ cd gbp-distill
 git checkout gh-pages
 ```
 
-### 1D GBP
+### 1D Surface Estimation
 
 ```
 open components/1dgbp.html  # or gnome-open
 ```
+Hosted [here](https://joeaortiz.github.io/gbp-distill/components/1dgbp.html).
+
+### 2D Robot Simulation
+
+```
+open components/2dgbp.html  # or gnome-open
+```
+Hosted [here](https://joeaortiz.github.io/gbp-distill/components/2dgbp.html).
 
 ## Development
 
@@ -23,4 +31,5 @@ npm install
 
 # build JS bundles
 npx browserify js/1dgbp.js -o js/bundles/1dgbp.js
+npx browserify js/2dgbp.js -o js/bundles/2dgbp.js
 ```

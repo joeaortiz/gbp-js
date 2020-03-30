@@ -14,7 +14,28 @@
 
 <canvas id="canvas" width="800" height="640"></canvas>
 
-<div id="place_landmarks"></div>
+<div id="sync"></div>
+<div id="map"></div>
+
+<p><br>Use this slider to set the standard deviation of the Gaussian measurement model for robot measurements of landmarks.</p>
+<div class="slidecontainer">
+  <input type="range" min="25" max="75" value="50" class="slider" id="meas_model_std">
+  <!-- <p id="mmstd"></p> -->
+</div>
+
+<p>Use this slider to set the standard deviation of the Gaussian measurement model for robot odometry measurements.</p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="100" value="50" class="slider" id="odometry_model_std">
+  <!-- <p id="sstd"></p> -->
+</div>
+
+<p>Use this slider to set number of iterations of GBP per second.</p>
+<div class="slidecontainer">
+  <input type="range" min="1" max="50" value="25" class="slider" id="iters_per_sec">
+  <p id="fps"></p>
+</div>
+
+<!-- <div id="place_landmarks"></div> -->
 
 
 <script type="text/javascript" src="./../js/bundles/2dgbp.js"></script>

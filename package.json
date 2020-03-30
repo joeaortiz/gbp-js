@@ -21,7 +21,8 @@
   },
   "homepage": "https://github.com/joeaortiz/gbp-distill#readme",
   "dependencies": {
-    "ml-matrix": "^6.4.1"
+    "ml-matrix": "^6.4.1",
+    "random": "^2.2.0"
   },
   "devDependencies": {
     "browserify": "^16.5.0"
