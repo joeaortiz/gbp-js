@@ -2,8 +2,8 @@
 
 ## Usage
 ```
-git clone git@github.com:joeaortiz/gbp-distill.git
-cd gbp-distill
+git clone git@github.com:joeaortiz/gbp-js.git
+cd gbp-js
 git checkout gh-pages
 ```
 
@@ -12,14 +12,14 @@ git checkout gh-pages
 ```
 open components/1dgbp.html  # or gnome-open
 ```
-Alternatively, hosted [here](https://joeaortiz.github.io/gbp-distill/components/1dgbp.html).
+Alternatively, hosted [here](https://joeaortiz.github.io/gbp-js/components/1dgbp.html).
 
 ### 2D Robot Simulation
 
 ```
 open components/2dgbp.html  # or gnome-open
 ```
-Alternatively, hosted [here](https://joeaortiz.github.io/gbp-distill/components/2dgbp.html).
+Alternatively, hosted [here](https://joeaortiz.github.io/gbp-js/components/2dgbp.html).
 
 ## Development
 
