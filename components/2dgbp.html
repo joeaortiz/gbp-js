@@ -1,44 +1,42 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>GBP - 2D Robot Simulation</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-
-  <style>
-    * { padding: 0; margin: 0; }
-    canvas { background: #eee; display: block; margin: 0 auto; }
-  </style>
+  <title>GBP - 2D Robot Simulation</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <link rel="stylesheet" href="./../css/style.css">
 </head>
 
 <body>
 
-<canvas id="canvas" width="800" height="640"></canvas>
+  <canvas id="canvas_2d" width="1100" height="640" ></canvas>
 
-<div id="sync"></div>
-<div id="map"></div>
+  <div class="center">
+    <p><font size="5">Move the robot using wasd</font></p>
 
-<p><br>Use this slider to set the standard deviation of the Gaussian measurement model for robot measurements of landmarks.</p>
-<div class="slidecontainer">
-  <input type="range" min="25" max="75" value="50" class="slider" id="meas_model_std">
-  <!-- <p id="mmstd"></p> -->
-</div>
+    <input type="button" class="button" id="sync_2d">
+    <input type="button" class="button" id="map_2d">
 
-<p>Use this slider to set the standard deviation of the Gaussian measurement model for robot odometry measurements.</p>
-<div class="slidecontainer">
-  <input type="range" min="1" max="100" value="50" class="slider" id="odometry_model_std">
-  <!-- <p id="sstd"></p> -->
-</div>
+    <p><br>Use this slider to set the standard deviation of the Gaussian measurement model for robot measurements of landmarks.</p>
+    <div class="slidecontainer">
+      <input type="range" min="25" max="75" value="50" class="slider" id="meas_model_std_2d">
+      <!-- <p id="sstd"></p> -->
+    </div>
 
-<p>Use this slider to set number of iterations of GBP per second.</p>
-<div class="slidecontainer">
-  <input type="range" min="1" max="50" value="25" class="slider" id="iters_per_sec">
-  <p id="fps"></p>
-</div>
+    <p>Use this slider to set the standard deviation of the Gaussian measurement model for robot odometry measurements.</p>
+    <div class="slidecontainer">
+      <input type="range" min="1" max="100" value="50" class="slider" id="odometry_model_std_2d">
+      <!-- <p id="sstd"></p> -->
+    </div>
 
-<!-- <div id="place_landmarks"></div> -->
+    <p>Use this slider to set number of iterations of GBP per second.</p>
+    <div class="slidecontainer">
+      <input type="range" min="1" max="50" value="25" class="slider" id="iters_per_sec_2d">
+      <p id="fps_2d"></p>
+    </div>
 
+  </div>
 
-<script type="text/javascript" src="./../js/bundles/2dgbp.js"></script>
+  <script type="text/javascript" src="./../js/bundles/2dgbp.js"></script>
 
 </body>
 </html>

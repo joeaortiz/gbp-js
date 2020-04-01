@@ -637,28 +637,26 @@ function update_odometry_model_std(val) {
 
 function update_iters_per_sec(val) {
   iters_per_sec = val;
-  document.getElementById("fps").innerHTML = iters_per_sec; 
+  document.getElementById("fps_2d").innerHTML = iters_per_sec; 
 }
 
-var mm_slider = document.getElementById("meas_model_std");
+var mm_slider = document.getElementById("meas_model_std_2d");
 mm_slider.oninput = function() { update_meas_model_std(this.value)}
-var s_slider = document.getElementById("odometry_model_std");
+var s_slider = document.getElementById("odometry_model_std_2d");
 s_slider.oninput = function() { update_odometry_model_std(this.value)}
-var i_slider = document.getElementById("iters_per_sec");
+var i_slider = document.getElementById("iters_per_sec_2d");
 i_slider.oninput = function() { update_iters_per_sec(this.value)}
 
 
 // Buttons
 function addButton(name, text, func) {
-  var buttonnode = document.createElement('input');
-  buttonnode.setAttribute('type','button');
+  var buttonnode = document.getElementById(name);
   buttonnode.setAttribute('value', text);
   buttonnode.addEventListener ("click", func, false);
-  document.getElementById(name).appendChild(buttonnode);
 }
 
-addButton('sync', 'Start synchronous GBP', start_syncGBP);
-addButton('map', 'Display MAP', display_MAP);
+addButton('sync_2d', 'Start synchronous GBP', start_syncGBP);
+addButton('map_2d', 'Display MAP', display_MAP);
 
 function start_syncGBP() {
   if (graph.factors.length == 0) {
@@ -698,22 +696,22 @@ function addLandmark(e) {
 document.addEventListener("keydown", checkKey);
 function checkKey(e) {
   e = e || window.event;
-  if (e.keyCode == '38') {
+  if (e.keyCode == '87') {
     if (robot_loc[1] > var_node_radius + step) {
       robot_loc[1] -= step;
     }
   }
-  else if (e.keyCode == '40') {
+  else if (e.keyCode == '83') {
     if (robot_loc[1] < canvas.height - var_node_radius - step) {
       robot_loc[1] += step;
     }
   }
-  else if (e.keyCode == '37') {
+  else if (e.keyCode == '65') {
     if (robot_loc[0] > var_node_radius + step) {
       robot_loc[0] -= step;
     }
   }
-  else if (e.keyCode == '39') {
+  else if (e.keyCode == '68') {
     if (robot_loc[0] < canvas.width - var_node_radius - step) {
       robot_loc[0] += step;
     }
@@ -730,7 +728,7 @@ function checkKey(e) {
 // Add key
 
 // Visual varaibles
-var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("canvas_2d");
 var ctx = canvas.getContext("2d");
 ctx.lineWidth = 2;
 

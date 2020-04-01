@@ -270,7 +270,7 @@ function create1Dgraph(n_var_nodes, smoothness_std) {
 // ****************************** Run GBP ************************************
 
 // Visual varaibles
-var canvas = document.getElementById("canvas");
+var canvas = document.getElementById("canvas_1d");
 var ctx = canvas.getContext("2d");
 ctx.lineWidth = 3
 
@@ -480,14 +480,14 @@ function update_smoothness_std(val) {
 
 function update_iters_per_sec(val) {
   iters_per_sec = val;
-  document.getElementById("fps").innerHTML = iters_per_sec; 
+  document.getElementById("fps_1d").innerHTML = iters_per_sec; 
 }
 
-var mm_slider = document.getElementById("meas_model_std");
+var mm_slider = document.getElementById("meas_model_std_1d");
 mm_slider.oninput = function() { update_meas_model_std(this.value)}
-var s_slider = document.getElementById("smoothness_std");
+var s_slider = document.getElementById("smoothness_std_1d");
 s_slider.oninput = function() { update_smoothness_std(this.value)}
-var i_slider = document.getElementById("iters_per_sec");
+var i_slider = document.getElementById("iters_per_sec_1d");
 i_slider.oninput = function() { update_iters_per_sec(this.value)}
 
 
@@ -527,16 +527,14 @@ function display_MAP() {
 }
 
 function addButton(name, text, func) {
-  var buttonnode = document.createElement('input');
-  buttonnode.setAttribute('type','button');
+  var buttonnode = document.getElementById(name);
   buttonnode.setAttribute('value', text);
   buttonnode.addEventListener ("click", func, false);
-  document.getElementById(name).appendChild(buttonnode);
 }
 
-addButton('sync', 'Start synchronous GBP', start_syncGBP);
-addButton('sweep', 'Start a sweep of GBP', start_sweepGBP);
-addButton('map', 'Display MAP', display_MAP);
+addButton('sync_1d', 'Start synchronous GBP', start_syncGBP);
+addButton('sweep_1d', 'Start a sweep of GBP', start_sweepGBP);
+addButton('map_1d', 'Display MAP', display_MAP);
 
 // On click on canvas
 document.addEventListener("click", addMeasurement, false);
